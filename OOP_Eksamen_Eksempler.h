@@ -403,6 +403,126 @@ private:
     T second_;
 };
 
+// ==================== Template klasse metoder uden for klasse, ====================
+template <typename T>
+class PairBox {
+public:
+    PairBox(T first, T second);
+
+    T getFirst() const;
+    T getSecond() const;
+    T getLargest() const;
+
+private:
+    T first_;
+    T second_;
+};
+
+template <typename T>
+PairBox<T>::PairBox(T first, T second)
+    : first_{first}, second_{second}
+{
+}
+
+template <typename T>
+T PairBox<T>::getFirst() const {
+    return first_;
+}
+
+template <typename T>
+T PairBox<T>::getSecond() const {
+    return second_;
+}
+
+template <typename T>
+T PairBox<T>::getLargest() const {
+    if (first_ > second_) {
+        return first_;
+    }
+
+    return second_;
+}
+
+// ==================== Ekstre template eksempel ====================
+template <typename T>
+class PolynomialTemplate
+{
+public:
+    PolynomialTemplate(const std::vector<T>& coefficients);
+    T operator()(T value) const;
+    PolynomialTemplate operator+(const PolynomialTemplate& other) const;
+    size_t order() const;
+    size_t size() const;
+    std::string toString() const;
+
+private:
+    std::vector<T> coefficients_;
+};
+
+template <typename T>
+PolynomialTemplate<T>::PolynomialTemplate(const std::vector<T>& coefficients)
+    : coefficients_(coefficients)
+{
+}
+
+template <typename T>
+T PolynomialTemplate<T>::operator()(T value) const
+{
+    T result = T();
+    T power = T(1);
+    for (size_t i = 0; i < coefficients_.size(); ++i)
+    {
+        result += coefficients_[i] * power;
+        power *= value;
+    }
+    return result;
+}
+
+template <typename T>
+PolynomialTemplate<T> PolynomialTemplate<T>::operator+(const PolynomialTemplate<T>& other) const
+{
+    size_t maxSize = std::max(coefficients_.size(), other.coefficients_.size());
+    std::vector<T> result(maxSize, T());
+
+    for (size_t i = 0; i < coefficients_.size(); ++i)
+    {
+        result[i] += coefficients_[i];
+    }
+    for (size_t i = 0; i < other.coefficients_.size(); ++i)
+    {
+        result[i] += other.coefficients_[i];
+    }
+
+    return PolynomialTemplate<T>(result);
+}
+
+template <typename T>
+size_t PolynomialTemplate<T>::order() const
+{
+    return coefficients_.size() - 1;
+}
+
+template <typename T>
+size_t PolynomialTemplate<T>::size() const
+{
+    return coefficients_.size();
+}
+
+template <typename T>
+std::string PolynomialTemplate<T>::toString() const
+{
+    std::ostringstream oss;
+    for (size_t i = 0; i < coefficients_.size(); ++i)
+    {
+        if (i > 0)
+        {
+            oss << " + ";
+        }
+        oss << coefficients_[i] << "x^" << i;
+    }
+    return oss.str();
+}
+
 // ==================== STL ====================
 
 class StlVectorExample {
