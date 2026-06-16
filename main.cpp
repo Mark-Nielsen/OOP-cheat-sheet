@@ -389,5 +389,75 @@ int main() {
     std::cout << complex1 + complex2 << "\n";
     std::cout << complex1 * complex2 << "\n";
     
+ // ==================== Iterator med vector ====================
+
+    VectorIteratorExample vectorExample;
+
+    vectorExample.addNumber(10);
+    vectorExample.addNumber(20);
+    vectorExample.addNumber(30);
+
+    vectorExample.printWithIterator();
+
+    vectorExample.changeWithIterator();
+
+    vectorExample.printWithIterator();
+
+    // ==================== Const iterator med vector ====================
+
+    ConstIteratorExample constExample;
+
+    constExample.addName("Mark");
+    constExample.addName("Anna");
+    constExample.addName("Jonas");
+
+    constExample.printWithConstIterator();
+
+    // ==================== Iterator med map ====================
+
+    MapIteratorExample mapExample;
+
+    mapExample.addGrade("Mark", 7);
+    mapExample.addGrade("Anna", 10);
+    mapExample.addGrade("Jonas", 12);
+
+    mapExample.printGrades();
+
+    mapExample.increaseGrades();
+
+    mapExample.printGrades();
+
+    // ==================== Iterator med find ====================
+
+    FindIteratorExample findExample;
+
+    findExample.addNumber(5);
+    findExample.addNumber(10);
+    findExample.addNumber(15);
+
+    if (findExample.containsNumber(10)) {
+        std::cout << "10 findes\n";
+    }
+
+    if (!findExample.containsNumber(99)) {
+        std::cout << "99 findes ikke\n";
+    }
+
+    // ==================== Iterator med erase ====================
+
+    EraseIteratorExample eraseExample;
+
+    eraseExample.addNumber(1);
+    eraseExample.addNumber(2);
+    eraseExample.addNumber(3);
+
+    eraseExample.printNumbers();
+
+    eraseExample.removeNumber(2);
+
+    eraseExample.printNumbers();
+
     return 0;
 }
+
+   

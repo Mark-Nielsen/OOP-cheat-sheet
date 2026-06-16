@@ -405,9 +405,9 @@ private:
 
 // ==================== Template klasse metoder uden for klasse, ====================
 template <typename T>
-class PairBox {
+class PairBoxTemplate {
 public:
-    PairBox(T first, T second);
+    PairBoxTemplate(T first, T second);
 
     T getFirst() const;
     T getSecond() const;
@@ -419,23 +419,23 @@ private:
 };
 
 template <typename T>
-PairBox<T>::PairBox(T first, T second)
+PairBoxTemplate<T>::PairBoxTemplate(T first, T second)
     : first_{first}, second_{second}
 {
 }
 
 template <typename T>
-T PairBox<T>::getFirst() const {
+T PairBoxTemplate<T>::getFirst() const {
     return first_;
 }
 
 template <typename T>
-T PairBox<T>::getSecond() const {
+T PairBoxTemplate<T>::getSecond() const {
     return second_;
 }
 
 template <typename T>
-T PairBox<T>::getLargest() const {
+T PairBoxTemplate<T>::getLargest() const {
     if (first_ > second_) {
         return first_;
     }
@@ -1355,6 +1355,74 @@ public:
 private:
     double real_;
     double imaginary_;
+};
+
+// ==================== Iterator med vector ====================
+
+class VectorIteratorExample {
+public:
+    VectorIteratorExample();
+
+    void addNumber(int number);
+    void printWithIterator() const;
+    void changeWithIterator();
+
+private:
+    std::vector<int> numbers_;
+};
+
+// ==================== Const iterator med vector ====================
+
+class ConstIteratorExample {
+public:
+    ConstIteratorExample();
+
+    void addName(const std::string& name);
+    void printWithConstIterator() const;
+
+private:
+    std::vector<std::string> names_;
+};
+
+// ==================== Iterator med map ====================
+
+class MapIteratorExample {
+public:
+    MapIteratorExample();
+
+    void addGrade(const std::string& name, int grade);
+    void printGrades() const;
+    void increaseGrades();
+
+private:
+    std::map<std::string, int> grades_;
+};
+
+// ==================== Iterator med find ====================
+
+class FindIteratorExample {
+public:
+    FindIteratorExample();
+
+    void addNumber(int number);
+    bool containsNumber(int number) const;
+
+private:
+    std::vector<int> numbers_;
+};
+
+// ==================== Iterator med erase ====================
+
+class EraseIteratorExample {
+public:
+    EraseIteratorExample();
+
+    void addNumber(int number);
+    void removeNumber(int number);
+    void printNumbers() const;
+
+private:
+    std::vector<int> numbers_;
 };
 
 #endif

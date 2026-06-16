@@ -1462,3 +1462,122 @@ bool operator==(const Amount& left, const Amount& right) {
 
     return std::abs(leftStandard - rightStandard) < 0.001;
 }
+
+#include "IteratorEksempler.h"
+
+// ==================== Iterator med vector ====================
+
+VectorIteratorExample::VectorIteratorExample()
+    : numbers_{} {
+}
+
+void VectorIteratorExample::addNumber(int number) {
+    numbers_.push_back(number);
+}
+
+void VectorIteratorExample::printWithIterator() const {
+    // begin() peger på første element
+    // end() peger lige efter sidste element
+    for (auto it = numbers_.begin(); it != numbers_.end(); ++it) {
+        std::cout << *it << " ";
+    }
+
+    std::cout << "\n";
+}
+
+void VectorIteratorExample::changeWithIterator() {
+    // *it giver adgang til selve værdien
+    for (auto it = numbers_.begin(); it != numbers_.end(); ++it) {
+        *it = *it * 2;
+    }
+}
+
+// ==================== Const iterator med vector ====================
+
+ConstIteratorExample::ConstIteratorExample()
+    : names_{} {
+}
+
+void ConstIteratorExample::addName(const std::string& name) {
+    names_.push_back(name);
+}
+
+void ConstIteratorExample::printWithConstIterator() const {
+    // cbegin() og cend() bruges når værdierne ikke skal ændres
+    for (auto it = names_.cbegin(); it != names_.cend(); ++it) {
+        std::cout << *it << " ";
+    }
+
+    std::cout << "\n";
+}
+
+// ==================== Iterator med map ====================
+
+MapIteratorExample::MapIteratorExample()
+    : grades_{} {
+}
+
+void MapIteratorExample::addGrade(const std::string& name, int grade) {
+    grades_[name] = grade;
+}
+
+void MapIteratorExample::printGrades() const {
+    // Ved map er it->first key
+    // Ved map er it->second value
+    for (auto it = grades_.cbegin(); it != grades_.cend(); ++it) {
+        std::cout << it->first << ": " << it->second << "\n";
+    }
+}
+
+void MapIteratorExample::increaseGrades() {
+    // second kan ændres, fordi det er value
+    for (auto it = grades_.begin(); it != grades_.end(); ++it) {
+        it->second = it->second + 1;
+    }
+}
+
+// ==================== Iterator med find ====================
+
+FindIteratorExample::FindIteratorExample()
+    : numbers_{} {
+}
+
+void FindIteratorExample::addNumber(int number) {
+    numbers_.push_back(number);
+}
+
+bool FindIteratorExample::containsNumber(int number) const {
+    // std::find returnerer en iterator til elementet hvis det findes
+    // Hvis det ikke findes, returneres numbers_.end()
+    auto it = std::find(numbers_.begin(), numbers_.end(), number);
+
+    return it != numbers_.end();
+}
+
+// ==================== Iterator med erase ====================
+
+EraseIteratorExample::EraseIteratorExample()
+    : numbers_{} {
+}
+
+void EraseIteratorExample::addNumber(int number) {
+    numbers_.push_back(number);
+}
+
+void EraseIteratorExample::removeNumber(int number) {
+    // Iterator bruges til at finde elementet
+    auto it = std::find(numbers_.begin(), numbers_.end(), number);
+
+    // Hvis iteratoren ikke er end(), findes elementet
+    if (it != numbers_.end()) {
+        numbers_.erase(it);
+    }
+}
+
+void EraseIteratorExample::printNumbers() const {
+    for (auto it = numbers_.cbegin(); it != numbers_.cend(); ++it) {
+        std::cout << *it << " ";
+    }
+
+    std::cout << "\n";
+}
